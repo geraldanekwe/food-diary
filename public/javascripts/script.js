@@ -1,26 +1,16 @@
-var app = angular.module("quotesApp", []);
+var app = angular.module("foodDiaryApp", []);
 
-app.controller("MainCtrl", function($scope, $http) {
-  $http.get("/quotes").success(function(data) {
-    $scope.quotes = data.quotes;
-  });
+app.controller("FoodDiaryCtrl", function($scope, $http) {
+  $scope.user = {};
+  $scope.food = {};
 
-  $scope.addQuote = function() {
-    $scope.formError = "";
-    $http.post("/quotes", {
-      quote: $scope.newQuote
-    }).success(function(data) {
-      $scope.quotes.push(data.quote);
-      $scope.newQuote = "";
-    }).catch(function(err) {
-      $scope.formError = err.data.error
-    });
+  $scope.saveUser = function() {
+    console.log($scope.user);
+    $scope.user = {};
   }
-  $scope.deleteQuote = function(quoteIndex) {
-    $http.delete("/quotes/" + quoteIndex).success(function(response) {
-      $scope.quotes.splice(parseInt(response.deletedIndex), 1);
-    }).catch(function(response) {
-
-    });
+  $scope.saveFood = function() {
+    console.log($scope.food);
+    $scope.user = {};
   }
+
 });
