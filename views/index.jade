@@ -1,0 +1,14 @@
+extend codinghouse
+
+block content
+  form(ng-submit='addQuote()')
+    input(placeholder='Write quote here', name='quote', ng-model='newQuote', required)
+    button(type='submit') Add Quote
+
+  .error {{formError}}
+
+  ul
+    li(ng-repeat="quote in quotes | filter: '' track by $index")
+      span.fa.fa-trash-o(ng-click="deleteQuote($index)")
+      | &nbsp;
+      span.quote {{quote}}

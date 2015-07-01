@@ -1,0 +1,7 @@
+form(action='/quotes', method='POST')
+  input(placeholder='Write quote here', name='quote')
+  button(type='submit') Add Quote
+
+ul
+ - each quote in quotes
+   li= quote
