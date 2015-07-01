@@ -71,7 +71,7 @@ html
                 label Calories
                 input#calories.form-control(type='text', placeholder='Calories', ng-model='food.calories')
                 label Servings
-                input#calories.form-control(type='text', placeholder='Servings', ng-model='servings')
+                input#calories.form-control(type='text', placeholder='Servings', ng-model='food.servings')
             button.btn.btn-primary.btn-lg(type='submit') Save Food
         .items
           table.table.table-striped
@@ -79,22 +79,22 @@ html
               tr
                 th Edit
                 th Delete
-                th User
                 th Description
                 th Meal
                 th Calories
                 th Servings
                 th Date
             tbody
-              tr
+              tr(ng-repeat='food in foodList')
                 td <button type="button" class="btn btn-info">Edit</button>
                 td <button type="button" class="btn btn-danger">Delete</button>
-                td User
-                td Description
-                td Meal
-                td Calories
-                td Servings
-                td Date
+                td {{food.desc}}
+                td {{food.meal}}
+                td {{food.calories}}
+                td {{food.servings}}
+                td {{food.date}}
+
+
 
 
 

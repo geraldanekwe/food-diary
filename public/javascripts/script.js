@@ -1,16 +1,25 @@
 var app = angular.module("foodDiaryApp", []);
 
 app.controller("FoodDiaryCtrl", function($scope, $http) {
-  $scope.user = {};
-  $scope.food = {};
 
   $scope.saveUser = function() {
-    console.log($scope.user);
+    $http.post("/users", $scope.user).success(function(data) {
+      // $scope.data = data;
+    }).catch(function(err) {
+      // $scope.formError = err.data.error;
+    });
+
     $scope.user = {};
   }
   $scope.saveFood = function() {
-    console.log($scope.food);
-    $scope.user = {};
+    $scope.food.date = new Date();
+    $http.post("/food/", $scope.food).success(function(data) {
+      $scope.foodList = data;
+    }).catch(function(err) {
+      $scope.formError = err.data.error;
+    });
+
+    $scope.food = {};
   }
 
 });
