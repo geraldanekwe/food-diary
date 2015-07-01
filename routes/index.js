@@ -20,6 +20,10 @@ router.post('/food/', function(req, res) {
 
 router.delete("/food/:id", function(req, res) {
   foodArr.splice(req.params.id, 1);
+  res.json({
+    message: 'item deleted',
+    deletedIndex: req.params.id
+  });
 });
 
 

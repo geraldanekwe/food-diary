@@ -24,10 +24,10 @@ html
                     th Current Weight
                 tbody
                   tr.active
-                    th(scope='row') 1
-                    td Column content
-                    td Column content
-                    td Column content
+                    th(scope='row') {{bmi}}
+                    td {{userData.weight}}
+                    td {{weightGained}}
+                    td {{currentWeight}}
         .diary
           p#title-food Food Diary
           p
@@ -85,9 +85,11 @@ html
                 th Servings
                 th Date
             tbody
-              tr(ng-repeat='food in foodList')
-                td <button type="button" class="btn btn-info">Edit</button>
-                td <button type="button" class="btn btn-danger">Delete</button>
+              tr(ng-repeat="food in foodList track by $index")
+                td
+                  button.btn.btn-danger(type='button', ng-click='editItem($index)') Edit
+                td 
+                  button.btn.btn-danger(type='button', ng-click='deleteItem($index)') Delete
                 td {{food.desc}}
                 td {{food.meal}}
                 td {{food.calories}}
