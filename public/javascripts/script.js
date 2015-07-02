@@ -2,6 +2,11 @@ var app = angular.module("foodDiaryApp", []);
 
 app.controller("FoodDiaryCtrl", function($scope, $http) {
 
+  $http.get("/").success(function(data) {
+    console.log(data);
+
+  });
+
   function computeWeight() {
     var totalCalories = $scope.foodList.reduce(function(accumulator, food) {
       return accumulator + (food.calories * food.servings);
@@ -20,7 +25,7 @@ app.controller("FoodDiaryCtrl", function($scope, $http) {
       $scope.userData = data;
       computeBMI();
     }).catch(function(err) {
-      // $scope.formError = err.data.error;
+
     });
 
     $scope.user = {};

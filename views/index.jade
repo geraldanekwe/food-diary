@@ -12,6 +12,7 @@ html
   body(ng-app='foodDiaryApp' ng-controller='FoodDiaryCtrl')
 
     block content
+      #init(ng-init='foodies= "#{food1}"') 
       .container
         .stats
           p#title Statistics
@@ -85,7 +86,7 @@ html
                 th Servings
                 th Date
             tbody
-              tr(ng-repeat="food in foodList track by $index")
+              tr(ng-repeat="food in foodies track by $index")
                 td
                   button.btn.btn-danger(type='button', ng-click='editItem($index)') Edit
                 td 

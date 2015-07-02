@@ -1,21 +1,44 @@
 var express = require('express'),
-  fs = require("fs");
+  fs = require("fs"),
+  Firebase = require('firebase');
 var router = express.Router();
-var foodArr = [];
+var foodArr = [],
+  usersArr = [],
+  foodListArr = [];
 
+var usersRef = new Firebase("https://historic1.firebaseio.com/users");
+var foodRef = new Firebase("https://historic1.firebaseio.com/food");
 
-router.get('/', function(req, res) {
-  res.render('index');
+router.get('/', function(req, res, next) {
+  foodRef.once("value", function(snap) {
+    foodArr.push(snap.val());
+  });
+  foodArr.map(function(obj) {
+    foodListArr = [];
+    for (var key in obj) {
+      foodListArr.push(obj[key]);
+    }
+    console.log(foodListArr);
+  });
+  // res.JSON(foodListArr);
+  res.render('index', {
+    food1: foodListArr
+  });
+
 });
 
 
 router.post('/users', function(req, res) {
+  usersRef.push(req.body);
   res.send(req.body);
 });
 
 router.post('/food/', function(req, res) {
-  foodArr.push(req.body);
-  res.send(foodArr);
+  foodRef.push(req.body);
+  foodRef.once("value", function(snap) {
+    foodArr.push(snap.val());
+    res.send(foodArr);
+  });
 });
 
 router.delete("/food/:id", function(req, res) {
